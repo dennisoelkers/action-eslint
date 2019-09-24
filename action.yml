@@ -25,6 +25,7 @@ runs:
     - ${{ inputs.level }}
     - ${{ inputs.reporter }}
     - ${{ inputs.eslint_flags }}
+    - ${{ inputs.workdir }}
 branding:
   icon: 'alert-octagon'
   color: 'blue'
