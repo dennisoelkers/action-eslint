@@ -1,12 +1,8 @@
 #!/bin/sh
 
-cd "$GITHUB_WORKSPACE"
+cd "$GITHUB_WORKSPACE/${WORKDIR}"
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
-
-if [ ! -f "$(npm bin)/eslint" ]; then
-  npm install
-fi
 
 $(npm bin)/eslint --version
 
@@ -20,3 +16,4 @@ else
   $(npm bin)/eslint -f="stylish" "${INPUT_ESLINT_FLAGS:-'.'}" \
     | reviewdog -f="eslint" -reporter=github-pr-check -level="${INPUT_LEVEL}"
 fi
+
