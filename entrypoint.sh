@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 echo "Changing to workspace/${INPUT_WORKDIR}..."
 cd "$GITHUB_WORKSPACE/${INPUT_WORKDIR}"
 
@@ -8,6 +10,8 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 $(npm bin)/eslint --version
 
 echo "Submitting with reporter ${INPUT_REPORTER} at level ${INPUT_LEVEL}"
+
+$(npm bin)/eslint -f="stylish" "${INPUT_ESLINT_FLAGS:-'.'}"
 
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
   # Use jq and github-pr-review reporter to format result to include link to rule page.
